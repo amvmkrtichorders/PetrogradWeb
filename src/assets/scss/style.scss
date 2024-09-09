@@ -1,0 +1,60 @@
+:root {
+  --cont-width: 92.875rem;
+  --col_space: 15px;
+  --gap: 1rem;
+  --x-space: 3.75rem;
+  --font-main: 'TTCommonsTrialRegular';
+  --font-bold: 'TTCommonsTrialBold';
+  --font-heading: 'Soviet';
+
+  --radius: 0;
+  --letter-spacing: .04em;
+  --brand-color: #FC0000;
+  --main-text-color: #192632;
+  --heading-main-color: #192632;
+  --dark-mode: #192632;
+  --dark-mode-text: #F1F1F1;
+  --primary-color: #FC0000;
+  --primary-hover-color: #B90303;
+  --primary-text-color: #fff;
+  --secondary-color: #F1E7D4;
+
+  --form-field-color: #BDB199;
+  --form-error-color: #FC0000;
+
+  --text-x-move: 0;
+}
+
+@import "variables";
+@import "mixins";
+@import "fonts";
+@import "reset";
+@import "extends";
+@import "general";
+@import "buttons";
+@import "forms";
+@import "menu";
+@import "header";
+@import "footer";
+@import "pages";
+
+@include respond-below(xl){
+  :root{
+    --x-space: 2rem;
+  }
+}
+@include respond-below(lg){
+  :root{
+    --letter-spacing: 0.02em;
+  }
+}
+@include respond-below(sm){
+  :root{
+    --x-space: .625rem;
+  }
+}
+
+
+
+
+

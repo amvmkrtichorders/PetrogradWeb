@@ -1,0 +1,98 @@
+// Forms
+.form-field-wrap{
+  position: relative;
+  margin-bottom: .625rem;
+
+  &--checkbox{
+    margin-bottom: 0;
+  }
+  &__error{
+    color: var(--form-error-color);
+    padding-left: 1em;
+    margin-top: 10px;
+    @extend %text-14;
+  }
+}
+
+%input-style{
+  border-radius: var(--radius);
+  border: 1px solid var(--form-field-color);
+  color: var(--main-text-color);
+  padding: .4em 1em;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: var(--font-main, 'sans-serif'), 'sans-serif';
+  @include size(100%, 3.75rem);
+  @include trns;
+  font-weight: inherit;
+
+  &:disabled{
+    color: var(--form-placeholder-color);
+  }
+  &:hover,
+  &:not(:placeholder-shown),
+  &:focus{
+    border-color: var(--dark-mode);
+  }
+  .form-field-wrap--error &{
+    border: 1px solid var(--form-error-color);
+  }
+  @include input-placeholder{
+    color: var(--form-field-color);
+    .form-field-wrap--error &{
+      color: var(--form-error-color);
+    }
+  }
+  html[dir=rtl] &{
+    text-align: right;
+  }
+}
+input{
+  &.form-field,
+  &[type=number],
+  &[type=search],
+  &[type=tel],
+  &[type=time],
+  &[type=url],
+  &[type=color],
+  &[type=email],
+  &[type=week],
+  &[type=month],
+  &[type=datetime-local],
+  &[type=datetime],
+  &[type=date],
+  &[type=password],
+  &[type=number],
+  &[type=text]{
+    @extend %input-style;
+  }
+  &[type=checkbox]{
+    display: none;
+
+    + label{
+      position: relative;
+      display: flex;
+      gap: 5px;
+      &:before{
+        content: "";
+        display: inline-block;
+        border: 1px solid var(--main-text-color);
+        flex-shrink: 0;
+        padding: 2px;
+        background-clip: content-box;
+        @include size(.7142em);
+        @include trns();
+      }
+      &:hover:before{
+        border-color: var(--brand-color);
+      }
+    }
+    &:checked + label:before{
+      border-color: var(--brand-color);
+      background-color: var(--brand-color);
+    }
+  }
+}
+textarea{
+  @extend %input-style;
+}

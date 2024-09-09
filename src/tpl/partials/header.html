@@ -1,0 +1,35 @@
+<div class="mobile-nav">
+    <header class="mobile-nav__head">
+        <a href="#" class="logo">
+            <img src="./assets/img/Logo.svg" alt="Page title">
+        </a>
+        <a href="#" class="menu-toggle">
+            <svg class="icon"><use xlink:href="assets/img/sprite.svg#close"></use></svg>
+        </a>
+    </header>
+    <nav class="main-menu">
+        {{> menu}}
+    </nav>
+</div>
+
+<header class="header header--abs">
+    <div class="header__top">
+        <div class="container">
+            <div class="row align-center justify-between">
+                <div>
+                    <a href="#" class="logo"><img src="assets/img/Logo.svg" alt="Petrograd Bike"></a>
+                </div>
+                <nav class="main-menu d-none-lg-down">
+                    {{> menu}}
+                </nav>
+                <div class="d-block-lg-down">
+                    <a href="#" class="menu-toggle">
+                        <svg class="icon"><use xlink:href="assets/img/sprite.svg#menu"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+

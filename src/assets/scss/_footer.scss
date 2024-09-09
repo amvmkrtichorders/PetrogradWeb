@@ -1,0 +1,30 @@
+.footer{
+  &__bottom{
+    padding-block: 1.7rem;
+    background-color: var(--dark-mode);
+    color: var(--dark-mode-text);
+  }
+  &__links{
+    color: #6e6e6e;
+    a{
+      color: #fff;
+      border-bottom: 1px solid;
+      &:hover{
+        color: #f00;
+      }
+    }
+  }
+
+  @include respond-below(sm){
+    &__bottom{
+      font-size: .875rem;
+      padding-block: .85rem;
+
+      .row{
+        gap: .5rem;
+        justify-content: center;
+        flex-direction: column;
+      }
+    }
+  }
+}

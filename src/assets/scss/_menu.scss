@@ -1,0 +1,74 @@
+.menu {
+  $p: &;
+  font-family: var(--font-main, 'sans-serif'), 'sans-serif';
+  font-weight: 400;
+  @include listReset();
+  @include flexbox();
+
+  &__item{
+    position: relative;
+    a{
+      padding: 2rem 1rem;
+      &:hover{
+        background-color: var(--brand-color);
+      }
+    }
+  }
+}
+
+
+// mobile nav
+.mobile-nav {
+  position: fixed;
+  @include flex-column();
+  top: 0;
+  z-index: 998;
+  left: 0;
+  overflow: auto;
+  background-color: var(--primary-color);
+  transform: translateX(-105%);
+  opacity: 0;
+  max-width: 25rem;
+  @include size(calc(100% - 3.5rem), 100%);
+  @include trns(all, .05s);
+
+  &__head{
+    padding: 2rem 1.25rem 1.5rem;
+    @include flexbox(center, space-between);
+  }
+  .main-menu{
+    padding: 1.25rem;
+    font-size: 1rem;
+    > .menu{
+      gap: 0;
+      > li{
+        flex: 1 1 100%;
+        padding-block: .8rem;
+        &:hover{
+          .sub-menu{
+            grid-template-rows: 1fr;
+          }
+        }
+      }
+    }
+  }
+  body.mobile-menu-open & {
+    transform: translateY(0);
+    transition-duration: .3s;
+    opacity: 1;
+  }
+  > * {
+    transform: translateX(-25%);
+    opacity: 0;
+    @include trns($duration: .5s, $delay: .2s);
+
+    body.mobile-menu-open & {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @include respond-above(xl){
+    display: none;
+  }
+}
+

@@ -1,0 +1,27 @@
+// extends
+%hide{
+  display: none;
+}
+%link-underline{
+  text-decoration: underline;
+  &:hover{
+    text-decoration-color: transparent;
+  }
+}
+%link-underline-hover{
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  &:hover{
+    text-decoration-color: initial;
+  }
+}
+%text-14{
+  font-size: .875rem;
+}
+%text-13{
+  font-size: .8125rem;
+  line-height: 1;
+}
+%text-12{
+  font-size: .75rem;
+}

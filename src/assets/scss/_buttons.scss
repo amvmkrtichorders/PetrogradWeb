@@ -1,0 +1,32 @@
+.btn{
+  padding: 1em 2.25em .7em;
+  font-family: var(--font-main, 'sans-serif'), 'sans-serif';
+  font-size: 20px;
+  display: inline-flex;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+  @include trns();
+
+  &--primary{
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+
+  }
+  &--skewed{
+    padding: .7em 2.5em .38em;
+    transform: skew(-15deg);
+    border-radius: 3px;
+    > span{
+      transform: skew(15deg);
+    }
+  }
+  &:hover{
+    box-shadow: 5px 5px 0 0 var(--primary-hover-color);
+  }
+  &:active{
+    background-color: var(--primary-hover-color);
+    color: #fff;
+    box-shadow: none;
+  }
+}

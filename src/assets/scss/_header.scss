@@ -1,0 +1,31 @@
+.header{
+  padding-block: 1.25rem;
+
+  &--abs{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+}
+.logo{
+  line-height: 1;
+  display: inline-block;
+  text-align: center;
+  img{
+    max-width: 90%;
+  }
+}
+.menu-toggle{
+  font-size: 1.65rem;
+  line-height: 1;
+  display: none;
+  .icon{
+    margin-top: 4px;
+  }
+  @include respond-below(lg){
+    display: inline-flex;
+  }
+}
+

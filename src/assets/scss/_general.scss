@@ -112,10 +112,8 @@ h1,.h1{
     font-size: 5rem;
   }
   @include respond-below(lg){
-    font-size: 3.9rem;
-  }
-  @include respond-below(sm){
     font-size: 2.5rem;
+    margin-bottom: 2rem;
   }
 }
 h2,.h2{

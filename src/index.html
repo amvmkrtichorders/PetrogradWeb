@@ -8,11 +8,17 @@ bodyclass: homepage
     {{> header}}
     <div class="page-content">
         {{> section-hero}}
-        <div class="scroll-effect" id="scrollEffect">
-            {{> section-video}}
-            {{> section-product}}
-            {{> section-contact}}
+        <div class="scroll-effect-wrap">
+            <div class="scroll-effect" id="scrollEffect">
+                {{> section-video}}
+                {{> section-product}}
+                {{> section-contact}}
+            </div>
         </div>
+    </div>
+    <div class="section-bg-text">
+        <div class="text-repeat" data-count="10"></div>
+        <div class="text-repeat" data-count="10"></div>
     </div>
     {{> footer}}
 </div>

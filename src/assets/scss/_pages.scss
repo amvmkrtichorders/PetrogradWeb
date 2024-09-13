@@ -3,15 +3,16 @@
 }
 .scroll-effect{
   overflow-y: hidden;
-  //scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;
+  background-color: var(--brand-color);
+  position: relative;
   @include size(100%, 100vh);
 
-  &.is-sticky{
+  body.enable-scroll-effect &{
     border-top: 5px solid yellow;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff;
     z-index: 1000;
   }
 
@@ -110,12 +111,9 @@
 }
 
 .section-video{
-  background-color: var(--brand-color);
 }
 
 .section-product{
-  background-color: var(--brand-color);
-
 }
 .section-contact{
   background-color: var(--secondary-color);
@@ -143,6 +141,7 @@
   color: #fff;
   @include flex-column();
   @include center(y);
+  position: fixed;
 }
 .text-repeat{
   display: flex;
@@ -206,4 +205,7 @@
   }
 }
 
-
+.scroll-effect-wrap{
+  height: 100vh;
+  position: relative;
+}

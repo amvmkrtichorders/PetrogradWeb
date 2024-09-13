@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent default scrolling */
+        }
+
+        .container {
+            height: 100vh;
+            overflow: hidden;
+            /*scroll-behavior: smooth; */
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section:nth-child(even) {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <section class="section">Section 1</section>
+    <section class="section">Section 2</section>
+    <section class="section">Section 3</section>
+    <section class="section">Section 4</section>
+</div>
+<script>
+    document.addEventListener('wheel', (event) => {
+        const container = document.querySelector('.container');
+        const sections = document.querySelectorAll('.section');
+        const sectionHeight = sections[0].offsetHeight;
+        const currentScroll = container.scrollTop;
+        let targetSection;
+
+        if (event.deltaY > 0) {
+            // Scrolling down
+            targetSection = Math.min(sections.length - 1, Math.floor(currentScroll / sectionHeight) + 1);
+        } else {
+            // Scrolling up
+            targetSection = Math.max(0, Math.floor(currentScroll / sectionHeight) - 1);
+        }
+
+        container.scrollTo({
+            top: targetSection * sectionHeight,
+            behavior: 'smooth'
+        });
+
+        event.preventDefault(); // Prevent default scrolling behavior
+    });
+</script>
+</body>
+</html>

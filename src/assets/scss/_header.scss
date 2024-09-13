@@ -10,7 +10,7 @@
   }
 
   body.transparent-section-in &{
-    color: #fff;
+    color: var(--primary-text-color);
   }
 }
 .logo{

@@ -11,6 +11,11 @@
       padding: 2rem 1rem;
       &:hover{
         background-color: var(--brand-color);
+
+        body.transparent-section-in &{
+          background-color: var(--primary-text-color);
+          color: var(--main-text-color);
+        }
       }
     }
   }

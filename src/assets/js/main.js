@@ -30,14 +30,14 @@ const phone = document.getElementById('inputPhone');
 
 if(phone) {
     phone.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\+\D/g, ''); // Remove all non-numeric characters
-        value = value.substring(0, 16); // Ensure max of 10 digits
+        let inputValue = e.target.value.replace(/\+\D/g, ''); // Remove all non-numeric characters
+        inputValue = inputValue.substring(0, 16); // Ensure max of 16 digits
 
-        if(value.length === 1)value = '+7 ' + value;
+        if(inputValue.length === 1) inputValue = '+7 ' + inputValue;
 
-        if(value.length === 6 || value.length === 10 || value.length === 13) value = value + '-'
+        if(inputValue.length === 6 || inputValue.length === 10 || inputValue.length === 13) inputValue = inputValue + '-'
 
-        e.target.value = value;
+        e.target.value = inputValue;
     });
 }
 

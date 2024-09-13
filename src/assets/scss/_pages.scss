@@ -4,22 +4,16 @@
 .scroll-effect{
   overflow-y: hidden;
   scroll-snap-type: y mandatory;
-  background-color: var(--brand-color);
   position: relative;
   @include size(100%, 100vh);
 
-  body.enable-scroll-effect &{
-    border-top: 5px solid yellow;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-
-  > .section{
-    //scroll-snap-align: start;
+  .section{
     position: relative;
     z-index: 20;
+    @include trns();
+    &:not(.slick-current){
+      opacity: 0;
+    }
   }
 }
 .section-hero{
@@ -110,11 +104,6 @@
   }
 }
 
-.section-video{
-}
-
-.section-product{
-}
 .section-contact{
   background-color: var(--secondary-color);
   h2{
@@ -150,8 +139,8 @@
   @include trns($duration: .7s);
   &:nth-child(odd){
     transform: translateX(100vw);
-    .slick-slide &{
-      animation: right-to-left 15s cubic-bezier(0.21, 0, 0, 0.97) forwards;
+    body.transparent-section-in &{
+      animation: right-to-left 19s ease forwards;
     }
     .section-bg-text.is-visible &{
       transform: translateX(20vw);
@@ -159,7 +148,9 @@
   }
   &:nth-child(even){
     transform: translateX(-100%);
-
+    body.transparent-section-in &{
+      animation: left-to-right 19s ease forwards;
+    }
     .section-bg-text.is-visible &{
       transform: translateX( calc(80vw - 100%) );
     }
@@ -177,7 +168,14 @@
   $p: &;
   position: relative;
   z-index: 20;
+  transform: translateY(30%) rotateZ(30deg);
+  transform-origin: left bottom;
+  @include trns($duration: .5s, $delay: .1s);
   @include center-m(27.375rem);
+
+  .slick-slide.is-visible &{
+    transform: none;
+  }
 
   &__button{
     position: absolute;

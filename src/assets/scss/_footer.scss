@@ -1,4 +1,16 @@
 .footer{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  z-index: 20;
+  @include trns();
+
+  body.last-slide &{
+    transition-delay: .2s;
+    transform: translateY(0);
+  }
   &__bottom{
     padding-block: 1.7rem;
     background-color: var(--dark-mode);

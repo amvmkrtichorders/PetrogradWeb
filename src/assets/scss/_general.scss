@@ -1,10 +1,8 @@
 
 // General
-html{
-  scroll-behavior: smooth;
-
-  @include respond-below(md){
-  }
+html, body{
+  height: 100%;
+  overflow: hidden;
 }
 body{
   background-color: var(--brand-color);

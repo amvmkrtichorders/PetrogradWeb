@@ -7,18 +7,21 @@ bodyclass: homepage
 <div class="wrapper">
     {{> header}}
     <div class="page-content">
-        {{> section-hero}}
-        <div class="scroll-effect-wrap">
-            <div class="scroll-effect" id="scrollEffect">
-                {{> section-video}}
-                {{> section-product}}
-                {{> section-contact}}
-            </div>
+        <div class="scroll-effect" id="scrollSlider">
+            {{> section-hero}}
+            {{> section-video}}
+            {{> section-product}}
+            {{> section-contact}}
         </div>
-    </div>
-    <div class="section-bg-text">
-        <div class="text-repeat" data-count="10"></div>
-        <div class="text-repeat" data-count="10"></div>
+<!--        <div class="scroll-effect-wrap">-->
+<!--            <div class="scroll-effect" id="scrollEffect">-->
+<!--                -->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     {{> footer}}
+    <div class="section-bg-text">
+        <div class="text-repeat" data-count="20"></div>
+        <div class="text-repeat" data-count="20"></div>
+    </div>
 </div>

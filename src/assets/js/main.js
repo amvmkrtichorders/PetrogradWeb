@@ -94,42 +94,115 @@ function cloneText(text){
         element.innerHTML = content;
     })
 }
-cloneText("Видео");
+// cloneText("Видео");
 
-document.addEventListener('wheel', (event) => {
-    const container = document.querySelector('.scroll-effect');
-    const sections = container.querySelectorAll('.section');
-    const sectionHeight = sections[0].offsetHeight;
-    const currentScroll = container.scrollTop;
-    const top = container.querySelector("#top");
-    let targetSection;
-    const rect = container.getBoundingClientRect();
-    const topRect = top.getBoundingClientRect();
-    console.log(currentScroll);
+// let currentIndex = 1;
+// document.addEventListener('wheel', (event) => {
+//     const container = document.querySelector('.scroll-effect');
+//     const sections = container.querySelectorAll('.section');
+//     const sectionHeight = sections[0].offsetHeight;
+//     const currentScroll = container.scrollTop;
+//     let targetSection;
+//     const rect = container.getBoundingClientRect();
+//
+//     if (event.deltaY > 0) {
+//         currentIndex = currentIndex < sections.length ? currentIndex + 1 : currentIndex;
+//         targetSection = Math.min(sections.length - 1, Math.floor(currentScroll / sectionHeight) + 1);
+//     } else {
+//         currentIndex = currentIndex > 1 ? currentIndex - 1 : currentIndex;
+//         targetSection = Math.max(0, Math.floor(currentScroll / sectionHeight) - 1);
+//     }
+//     console.log(currentIndex)
+//     sections[currentIndex - 1].classList.add('is-visible');
+//
+//     if(currentIndex === 2 || currentIndex === 3){
+//         document.body.classList.add('transparent-section-in');
+//     }else{
+//         document.body.classList.remove('transparent-section-in');
+//     }
+//
+//     container.scrollTo({
+//         top: targetSection * sectionHeight,
+//         behavior: 'smooth'
+//     });
+//
+//     if(currentScroll > 0){
+//         cloneText("Велосипед")
+//
+//     }
+//
+//     if(currentScroll === 0){
+//         cloneText("Машина");
+//     }
+// });
 
-    if(rect.top < 0){
-        document.body.classList.add("enable-scroll-effect");
-        if (event.deltaY > 0) {
-            targetSection = Math.min(sections.length - 1, Math.floor(currentScroll / sectionHeight) + 1);
-        } else {
-            targetSection = Math.max(0, Math.floor(currentScroll / sectionHeight) - 1);
-        }
-        console.log(targetSection)
-        container.scrollTo({
-            top: targetSection * sectionHeight,
-            behavior: 'smooth'
-        });
-
-        if(currentScroll > 0){
-            cloneText("Велосипед")
-
-        }
-
-        // event.preventDefault();
-    }else{
-        document.body.classList.remove("enable-scroll-effect");
+jQuery(function($){
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
     }
-});
+
+    function slick_handle_wheel_event(e, slick_instance, slick_is_animating) {
+        if (!slick_is_animating) {
+            const direction = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+
+            if (direction > 0) {
+                slick_instance.slick("slickNext");
+            } else {
+                slick_instance.slick("slickPrev");
+            }
+        }
+    }
+
+    const slick_handle_wheel_event_debounced = debounce(
+        slick_handle_wheel_event
+        , 100, true
+    );
+
+    const scrollSlider = $('#scrollSlider')
+    if(typeof $.fn.slick === "function"){
+        scrollSlider.slick({
+            verticalSwiping: true,
+            vertical: true,
+            infinite: false,
+            arrows: false,
+            speed: 500
+        })
+
+        scrollSlider.on("wheel", function(e) {
+            slick_handle_wheel_event_debounced(e.originalEvent, scrollSlider, false);
+        });
+        scrollSlider.on("beforeChange", function(event, slick, currentSlide, next) {
+            slick.$slides[next].classList.add('is-visible')
+
+            if(slick.$slides[next].dataset.label){
+                cloneText(slick.$slides[next].dataset.label);
+            }
+
+            if(next === 1 || next === 2){
+                document.body.classList.add('transparent-section-in');
+            }else{
+                document.body.classList.remove('transparent-section-in');
+            }
+
+            if (slick.$slides.length-1 === next) {
+                document.body.classList.add('last-slide');
+            }else{
+                document.body.classList.remove('last-slide');
+            }
+        });
+    }
+})
 
 
 // alert(`Your screen resolution is: ${window.innerWidth} X ${window.innerHeight}`)

@@ -92,6 +92,20 @@
       display: inline-block;
     }
   }
+  &__submit-message{
+    margin-top: 1.5rem;
+    display: none;
+    line-height: 1.15;
+    gap: var(--col_space);
+
+    .form--submitted &{
+      display: flex;
+    }
+    .icon{
+      font-size: 1.5rem;
+      color: var(--form-success-color);
+    }
+  }
   @include respond-below(md){
     &__footer{
       flex-direction: column;

@@ -1,31 +1,4 @@
 
-function toggleClassOnScroll(className){
-    const elements = document.querySelectorAll(`.${className}`);
-    if(!elements.length) return;
-
-    elements.forEach(el => {
-        let counter = 0;
-        for(const child of el.children){
-            child.style.setProperty('--anim-delay', `${counter * .1}s`);
-            counter++;
-        }
-
-        const {scrollTop, clientHeight} = document.documentElement;
-
-        const topElementToTopViewport = el.getBoundingClientRect().top;
-
-        if(scrollTop > (scrollTop + topElementToTopViewport).toFixed() - clientHeight){
-            el.classList.add('is-visible');
-        }
-    });
-}
-
-toggleClassOnScroll('section-bg-text');
-
-window.addEventListener('scroll', function (){
-    toggleClassOnScroll('section-bg-text');
-});
-
 function closeMenu(){
     document.body.classList.remove('mobile-menu-open');
 }
@@ -57,28 +30,40 @@ const phone = document.getElementById('inputPhone');
 
 if(phone) {
     phone.addEventListener('input', function(e) {
-        phone.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); // Remove all non-numeric characters
-            value = value.substring(0, 10); // Ensure max of 10 digits
+        let value = e.target.value.replace(/\+\D/g, ''); // Remove all non-numeric characters
+        value = value.substring(0, 16); // Ensure max of 10 digits
 
-            // Apply mask
-            if (value.length > 0) {
-                value = '+7 ' + value;
-                if (value.length > 6) {
-                    value = value.slice(0, 6) + '-' + value.slice(6);
-                }
-                if (value.length > 10) {
-                    value = value.slice(0, 10) + '-' + value.slice(10);
-                }
-                if (value.length > 13) {
-                    value = value.slice(0, 13) + '-' + value.slice(13);
-                }
-            }
+        if(value.length === 1)value = '+7 ' + value;
 
-            e.target.value = value;
-        });
+        if(value.length === 6 || value.length === 10 || value.length === 13) value = value + '-'
+
+        e.target.value = value;
     });
 }
+
+// form validation
+const form = document.querySelector('.form')
+const submitButton = form.querySelector('[type="submit"]');
+const requiredInputs = form.querySelectorAll('input[type="text"]')
+submitButton.addEventListener('click', function(e){
+    e.preventDefault();
+    let errorsCount = requiredInputs.length;
+    requiredInputs.forEach(input => {
+        const wrap = input.closest('.form-field-wrap');
+
+        if(input.value.length === 0){
+            wrap.classList.add('form-field-wrap--error');
+        }else{
+            wrap.classList.remove('form-field-wrap--error');
+            errorsCount--;
+        }
+
+        if(errorsCount === 0) {
+            form.classList.add('form--submitted')
+            form.reset()
+        }
+    })
+});
 
 // clone text
 function cloneText(text){
@@ -94,58 +79,18 @@ function cloneText(text){
         element.innerHTML = content;
     })
 }
-// cloneText("Видео");
 
-// let currentIndex = 1;
-// document.addEventListener('wheel', (event) => {
-//     const container = document.querySelector('.scroll-effect');
-//     const sections = container.querySelectorAll('.section');
-//     const sectionHeight = sections[0].offsetHeight;
-//     const currentScroll = container.scrollTop;
-//     let targetSection;
-//     const rect = container.getBoundingClientRect();
-//
-//     if (event.deltaY > 0) {
-//         currentIndex = currentIndex < sections.length ? currentIndex + 1 : currentIndex;
-//         targetSection = Math.min(sections.length - 1, Math.floor(currentScroll / sectionHeight) + 1);
-//     } else {
-//         currentIndex = currentIndex > 1 ? currentIndex - 1 : currentIndex;
-//         targetSection = Math.max(0, Math.floor(currentScroll / sectionHeight) - 1);
-//     }
-//     console.log(currentIndex)
-//     sections[currentIndex - 1].classList.add('is-visible');
-//
-//     if(currentIndex === 2 || currentIndex === 3){
-//         document.body.classList.add('transparent-section-in');
-//     }else{
-//         document.body.classList.remove('transparent-section-in');
-//     }
-//
-//     container.scrollTo({
-//         top: targetSection * sectionHeight,
-//         behavior: 'smooth'
-//     });
-//
-//     if(currentScroll > 0){
-//         cloneText("Велосипед")
-//
-//     }
-//
-//     if(currentScroll === 0){
-//         cloneText("Машина");
-//     }
-// });
 
 jQuery(function($){
     function debounce(func, wait, immediate) {
-        var timeout;
+        let timeout;
         return function() {
-            var context = this, args = arguments;
-            var later = function() {
+            const context = this, args = arguments;
+            const later = function() {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
-            var callNow = immediate && !timeout;
+            const callNow = immediate && !timeout;
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
             if (callNow) func.apply(context, args);
@@ -203,8 +148,3 @@ jQuery(function($){
         });
     }
 })
-
-
-// alert(`Your screen resolution is: ${window.innerWidth} X ${window.innerHeight}`)
-
-

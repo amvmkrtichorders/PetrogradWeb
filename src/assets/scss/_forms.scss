@@ -10,7 +10,11 @@
     color: var(--form-error-color);
     padding-left: 1em;
     margin-top: 10px;
+    display: none;
     @extend %text-14;
+  }
+  &--error &__error{
+    display: block;
   }
 }
 

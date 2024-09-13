@@ -4,9 +4,11 @@
         <form action="#" class="form" method="POST">
             <div class="form-field-wrap">
                 <input type="text" placeholder="Ваше имя" name="name">
+                <div class="form-field-wrap__error">Поле обязетельно к заполнению</div>
             </div>
             <div class="form-field-wrap ">
                 <input type="text" placeholder="+7 ___-___-__-__" id="inputPhone" name="phone" maxlength="16">
+                <div class="form-field-wrap__error">Поле обязетельно к заполнению</div>
             </div>
             <div class="form__footer">
                 <button class="btn btn--primary" type="submit">Отправить</button>
@@ -15,6 +17,10 @@
                     <input type="checkbox" id="agreeInput">
                     <label for="agreeInput">Нажимая на кнопку «Отправить» вы соглашаетесь с нашей политикой конфиденциальности</label>
                 </div>
+            </div>
+            <div class="form__submit-message">
+                <svg class="icon"><use xlink:href="assets/img/sprite.svg#success"></use></svg>
+                <p>Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время</p>
             </div>
         </form>
     </div>

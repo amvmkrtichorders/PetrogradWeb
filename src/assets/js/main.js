@@ -30,14 +30,25 @@ const phone = document.getElementById('inputPhone');
 
 if(phone) {
     phone.addEventListener('input', function(e) {
-        let inputValue = e.target.value.replace(/\+\D/g, ''); // Remove all non-numeric characters
-        inputValue = inputValue.substring(0, 16); // Ensure max of 16 digits
+        let input = e.target.value;
 
-        if(inputValue.length === 1) inputValue = '+7 ' + inputValue;
+        input = input.replace(/[^\d]/g, '');
 
-        if(inputValue.length === 6 || inputValue.length === 10 || inputValue.length === 13) inputValue = inputValue + '-'
+        if (input.length > 0 && input.charAt(0) !== '7') {
+            input = '7' + input;
+        }
 
-        e.target.value = inputValue;
+        if (input.length > 1 && input.length <= 4) {
+            input = `+7 ${input.substring(1)}`;
+        } else if (input.length > 4 && input.length <= 7) {
+            input = `+7 ${input.substring(1, 4)}-${input.substring(4)}`;
+        } else if (input.length > 7 && input.length <= 9) {
+            input = `+7 ${input.substring(1, 4)}-${input.substring(4, 7)}-${input.substring(7, 9)}`;
+        }else if (input.length > 9) {
+            input = `+7 ${input.substring(1, 4)}-${input.substring(4, 7)}-${input.substring(7, 9)}-${input.substring(9, 11)}`;
+        }
+
+        e.target.value = input;
     });
 }
 
